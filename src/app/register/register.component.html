@@ -1,0 +1,109 @@
+<!-- navbar -->
+<nav class="navbar" style="background-color: rgba(249, 18, 95, 0.751);">
+    <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" href="#">
+            <img src="https://icon-library.com/images/bank-icon-png/bank-icon-png-4.jpg"
+                style="height: 36px; width:38px">
+            Zest Bank
+        </a>
+        <div>
+            <button class="btn"><i class="fa-solid fa-user" style="color: #fafafa;"></i>
+                <a class="navbar-brand" style="color: white;" href="#"> Contact us</a>
+            </button>
+
+            <a class="navbar-brand" style="color: white;" href="#">Services</a>
+        </div>
+
+    </div>
+</nav>
+<div *ngIf="RegisterSuccess" class="container text-center mt-5">
+    <h1>Your Data is getting Registered....please wait<div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </h1>
+</div>
+
+<!-- register form -->
+<div *ngIf="!RegisterSuccess" class="container" style="padding-left: 90px;">
+    <form (ngSubmit)="register()" [formGroup]="registerForm">
+        <div class="row" style="padding-left: 55px;">
+
+            <div class="col-6">
+                <img src="https://assets-v2.lottiefiles.com/a/6beb774c-1166-11ee-a6f1-4788c8724adf/E9TtaYgKZu.gif"
+                    style="height: 500px;" alt="">
+            </div>
+            <div class="col-6 " style="padding-top: 80px; width:400px">
+                <div class="mb-3">
+                    <label for="" class="form-label">Account Number</label>
+                    <input type="text" name="acno" formControlName="acno" class="form-control" id=""
+                        aria-describedby="">
+                    <div *ngIf="this.registerForm.get('acno')?.errors&&this.registerForm.get('acno')?.touched"
+                        class="text-danger">*Invalid Account Number</div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Full Name</label>
+                    <input type="name" name="username" formControlName="username" class="form-control" id="">
+                    <div *ngIf="this.registerForm.get('username')?.errors&&this.registerForm.get('username')?.touched"
+                        class="text-danger">*Invalid User name</div>
+                </div>
+                <div class="mb-3">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password" name="password" formControlName="password" class="form-control"
+                        id="exampleInputPassword1">
+                    <div *ngIf="this.registerForm.get('password')?.errors&&this.registerForm.get('password')?.touched"
+                        class="text-danger">*Invalid Password</div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <h6 class="text-danger">{{RegisterError}}</h6>
+                <button type="submit" class="btn btn-primary">Register</button><br>
+                <div class="reg">
+                    <span>Already Have an Account?</span><span class="re"><a routerLink="/">login Here</a></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- footer -->
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-facebook-f"></i></a>
+  
+        <!-- Twitter -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-twitter"></i></a>
+  
+        <!-- Google -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-google"></i></a>
+  
+        <!-- Instagram -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-instagram"></i></a>
+  
+        <!-- Linkedin -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-linkedin"></i></a>
+        <!-- Github -->
+        <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+            class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(16, 109, 222, 0.944);">
+      © 2023 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">contactapp.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

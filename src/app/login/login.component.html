@@ -1,0 +1,102 @@
+<!-- navbar -->
+<nav class="navbar" style="background-color: rgba(249, 18, 95, 0.751);">
+  <div class="container-fluid">
+    <a class="navbar-brand" style="color: white;" href="#">
+      <img src="https://icon-library.com/images/bank-icon-png/bank-icon-png-4.jpg" style="height: 36px; width:38px">
+      Zest Bank
+    </a>
+    <div>
+      <button class="btn"><i class="fa-solid fa-user" style="color: #fafafa;"></i>
+        <a class="navbar-brand" style="color: white;" href="#"> Contact us</a>
+      </button>
+      
+      <a class="navbar-brand" style="color: white;" href="#">Services</a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- login form -->
+<div class="container">
+  <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <div class="row" style="padding-left: 90px;">
+      <div class="col-6">
+        <img width="470px" src="https://assets-v2.lottiefiles.com/a/da8d9286-116e-11ee-aeac-07c47fa5efd8/yRmxUgvzA6.gif"
+          alt="">
+      </div>
+      <div class="col-6" style="padding-top: 80px; width:400px">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Account Number</label>
+          <input type="text" name="acno" formControlName="acno" class="form-control" id="" aria-describedby="">
+          <div *ngIf="this.loginForm.get('acno')?.errors&&this.loginForm.get('acno')?.touched" class="text-danger">
+            *Invalid Account Number</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" name="password" formControlName="password" class="form-control"
+            id="exampleInputPassword1">
+          <div *ngIf="this.loginForm.get('password')?.errors&&this.loginForm.get('password')?.touched"
+            class="text-danger">*Invalid Password</div>
+        </div>
+        <br>
+        <h6 class="text-danger">{{loginError}}</h6>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div><br>
+        <h6 *ngIf="loginSuccess"><span style="color: blue;">Loading...Please wait </span>
+          <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </h6>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="reg">
+          <span>First Time User?</span><span class="re"><a routerLink="register">Register Here</a></span>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<!-- footer -->
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+  <!-- Grid container -->
+  <div class="container pt-4">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-facebook-f"></i></a>
+
+      <!-- Twitter -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-twitter"></i></a>
+
+      <!-- Google -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-google"></i></a>
+
+      <!-- Instagram -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-instagram"></i></a>
+
+      <!-- Linkedin -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-linkedin"></i></a>
+      <!-- Github -->
+      <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+          class="fab fa-github"></i></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center text-dark p-3" style="background-color: rgba(16, 109, 222, 0.944);">
+    © 2023 Copyright:
+    <a class="text-dark" href="https://mdbootstrap.com/">contactapp.com</a>
+  </div>
+  <!-- Copyright -->
+</footer>

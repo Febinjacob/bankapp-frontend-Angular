@@ -1,0 +1,207 @@
+<app-delete-acno [deleteAcno]="acno" (onCancel)="cancelDeleteConfirm()" (onDelete)="deleteFromParent()"></app-delete-acno>
+
+<div *ngIf="deleteSuccessMsg">
+    <h1>{{deleteSuccessMsg}}</h1>
+</div>
+
+
+<!-- NavBar -->
+<div *ngIf="!deleteConfirmStatus">
+    <nav class="navbar navbar-expand-lg" style="background-color: rgba(249, 18, 95, 0.751);">
+        <div class="container-fluid">
+            <span><img src="" alt=""></span><a class="navbar-brand" href="#" style="color: white;"> <img
+                    src="https://icon-library.com/images/bank-icon-png/bank-icon-png-4.jpg"
+                    style="height: 36px; width:38px;"> ZEST BANk</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto me-5" style="padding: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" style="color: white;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;" >Loans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: white;">Contact us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle me-5" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="color: white;">
+                            SERVICES
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a (click)="getBalance()" class="dropdown-item" data-bs-toggle="offcanvas"
+                                    href="#offcanvasExample"> <i class="fa-solid fa-money-check-dollar" style="color:#1a66ff"></i> Balance
+                                    Enquiry</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    <i class="fa-solid fa-comments-dollar" style="color:#1a66ff"></i> Fund
+                                    Transfer</a></li>
+                            <li><a routerLink="/transaction" class="dropdown-item" > <i
+                                        class="fa-solid fa-clock-rotate-left" style="color:#1a66ff"></i> Transaction
+                                    History</a></li>
+                            <li><a (click)="deleteAccount()" class="dropdown-item"> <i
+                                        class="fa-solid fa-trash-can" style="color:#1a66ff"></i> Remove Account</a>
+                            </li>
+                            <li><a (click)="logout()" class="dropdown-item"> <i
+                                        class="fa-solid fa-right-from-bracket" style="color:#1a66ff"></i> Log
+                                    Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <h6 *ngIf="logoutSucess"><span style="color: blue;">Loading...Please wait </span>
+            <div class="spinner-border text-success" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </h6>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="dashboardForm()" [formGroup]="foundTransfer">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="acno" formControlName="acno" class="form-control"
+                                id="floatingInput" placeholder="Credit Account Number">
+                            <label for="floatingInput">Credit Account Number</label>
+                            <div *ngIf="this.foundTransfer.get('acno')?.errors&&this.foundTransfer.get('acno')?.touched"
+                                class="text-danger">*Invalid Account Number</div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="amount" formControlName="amount" class="form-control"
+                                id="floatingPassword" placeholder="Amount">
+                            <label for="floatingInput">Amount</label>
+                            <div *ngIf="this.foundTransfer.get('amount')?.errors&&this.foundTransfer.get('amount')?.touched"
+                                class="text-danger">*Invalid Amount</div>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password" formControlName="password" class="form-control"
+                                id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                            <div *ngIf="this.foundTransfer.get('password')?.errors&&this.foundTransfer.get('password')?.touched"
+                                class="text-danger">*Invalid Password</div>
+                        </div>
+                        <div class="text-success fw-bolder text-center my-2">
+                            {{foundTransferSuccess}}
+                        </div>
+                        <div class="text-danger fw-bolder text-center my-2">
+                            {{foundTransferError}}
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" (click)="reset()" class="btn btn-danger">Reset</button>
+                            <button type="submit" (click)="dashboardForm()" class="btn btn-primary">Transfer</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- offcanvas -->
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <img style="border-radius: 20px;width:100%"
+                src="https://cdn.dribbble.com/users/1221795/screenshots/2850723/money.gif" alt="">
+            <div style="padding-top: 10px;">
+                <h5>Hey {{user}}</h5>
+                <h6>Your Current Balance is : ${{balance}}</h6>
+            </div>
+
+        </div>
+    </div>
+    <!-- main-content -->
+    <div class="container" style="padding-bottom: 10px;">
+        <div class="row">
+            <div class="col-6">
+                <!-- image -->
+                <img style="height: 500px;" src="https://mintbook.com/assetsNew/img/banking.gif" alt="">
+            </div>
+            <div class="col-6">
+                <div class="my-5">
+                    <!-- heading and texts -->
+                    <h1>Welcome {{user}}</h1>
+                    <p style="text-align: justify;">Online banking allows you to conduct financial transactions via the
+                        Internet.
+                        Online banking is also known as Internet banking or web banking. Online banking
+                        offers customers almost every service traditionally available through a local branch
+                        including deposits, transfers, and online bill payments.</p>
+                    <div class="collapse" id="collapseExample">
+
+                        Some placeholder content for the collapse component. This panel is hidden by default but
+                        revealed
+                        when the user activates the relevant trigger.
+
+                    </div><br>
+                    <button (click)="collapse()" class="btn btn-primary" data-bs-toggle="collapse"
+                        data-bs-target="#collapseExample">Read
+                        <span *ngIf="!isCollapse">More</span>
+                        <span *ngIf="isCollapse">Less</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <!-- Grid container -->
+        <div class="container pt-4">
+          <!-- Section: Social media -->
+          <section class="mb-4">
+            <!-- Facebook -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-facebook-f"></i></a>
+      
+            <!-- Twitter -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-twitter"></i></a>
+      
+            <!-- Google -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-google"></i></a>
+      
+            <!-- Instagram -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-instagram"></i></a>
+      
+            <!-- Linkedin -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-linkedin"></i></a>
+            <!-- Github -->
+            <a mdbRipple rippleColor="dark" class="btn btn-link btn-floating btn-lg text-danger m-1" href="#!" role="button"><i
+                class="fab fa-github"></i></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center text-dark p-3" style="background-color: rgba(16, 109, 222, 0.944);">
+          © 2023 Copyright:
+          <a class="text-dark" href="https://mdbootstrap.com/">contactapp.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+</div>

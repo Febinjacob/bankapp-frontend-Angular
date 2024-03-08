@@ -1,0 +1,64 @@
+                      BANK APP
+           ------------------------------------
+        1. create a new project - ng new bankapp-frontend
+        2. cd bankapp-frontend
+        3. code .
+        4. run the project- ng s -o
+        5. clear the code in app.component.html
+        6. install 3rd party libraries
+                i)bootstrap - copy and paste bootstrap link index.html
+               ii) fontawesome - copy an paste cdnjs link  in index.html
+               iii)google fonts -copy and paste google fonts links in style.css
+        7. create components
+            ->Register - ng g c register
+            ->login - ng g c login
+            ->Dashboard - ng g c dashboard
+            ->transaction - ng g c transaction
+            ->pagenotfound- ng g c pageNotFound 
+
+        8. path setup 
+                setup  path for each component in app-routing module.ts
+        9. use router outlet in app.component.html
+        10. page Description        
+
+        11.Reactive Forms
+         Reactive forms provide a model-driven approach to handling form inputs whose values change over time. 
+         This guide shows you how to create and update a basic form control,
+         progress to using multiple controls in a group, validate form values,
+          and create dynamic forms where you can add or remove controls at run time.
+        Reactive forms provide a model-driven approach to handling form 
+        inputs whose values change over time.
+        Reactive forms are built around observable streams,
+         where form inputs and values are provided as streams of input values, 
+         which can be accessed synchronously.
+          
+        ->app.module.ts
+        import { ReactiveFormsModule } from '@angular/forms';
+        @NgModule({
+                imports: [
+                // other imports ...
+                ReactiveFormsModule
+                ],
+            })
+        
+        ->FormArray = in ts
+
+        ->FormGroup = in ts
+        Constructs a new FormGroup instance. Accepts a single generic argument, 
+        which is an object containing all the keys and corresponding inner control types.
+
+        ->FormControl = in html file 
+
+        ->FormBuilder
+        The FormBuilder provides syntactic sugar that shortens creating instances of a FormControl, 
+         FormGroup, or FormArray.
+         It reduces the amount of boilerplate needed to build complex forms.
+
+
+         *ngIf 
+
+
+
+
+
+
